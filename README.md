@@ -25,7 +25,7 @@ This prototype solves this by providing:
 ## 🛠 Tech Stack
 
 * **Frontend:** React 19, Vite, Tailwind CSS (Customized Hero Vida Purple Theme)
-* **AI Engine:** Google Gemini 2.0 Flash (Multimodal Vision API)
+* **AI Engine:** Advanced Multimodal Vision API
 * **Backend/Auth:** Firebase (for persistent report history and user sessions)
 * **UI Components:** Lucide React, Recharts
 
@@ -35,7 +35,7 @@ This prototype solves this by providing:
 
 ### Prerequisites
 * Node.js (v18+ recommended)
-* A Google Gemini API Key
+* A valid API Key for the Vision AI
 
 ### Installation
 
@@ -46,7 +46,7 @@ This prototype solves this by providing:
 
 2. Create a `.env.local` file in the root directory:
    ```env
-   VITE_API_KEY=your_gemini_api_key_here
+   VITE_API_KEY=your_api_key_here
    ```
 
 3. Run the development server:
@@ -63,6 +63,6 @@ This prototype solves this by providing:
 1. **Login:** Use the Mock Login to bypass authentication for demo purposes.
 2. **Launch Scanner:** Click "Start Assessment" on the dashboard.
 3. **Upload Image:** Upload a clear photo of vehicle damage (2W, 3W, or 4W).
-4. **View Report:** The system will process the image via Gemini and return a comprehensive report including visual bounding boxes, severity, category (Functional/Cosmetic), fraud risk, and itemized cost estimates in INR.
+4. **View Report:** The system will process the image via the AI engine and return a comprehensive report including visual bounding boxes, severity, category (Functional/Cosmetic), fraud risk, and itemized cost estimates in INR.
 5. **PDF Export:** Click "Download PDF Report" to generate an exportable document.
 
