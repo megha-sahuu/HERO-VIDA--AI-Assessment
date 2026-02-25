@@ -7,7 +7,7 @@ const processImage = async (base64Image: string): Promise<AssessmentResult> => {
   const apiKey = import.meta.env.VITE_API_KEY || import.meta.env.VITE_GEMINI_API_KEY;
 
   if (!apiKey) {
-    throw new Error("API Key not found. Please set the VITE_GEMINI_API_KEY environment variable.");
+    throw new Error("API Key not found. Please set the VITE_API_KEY environment variable.");
   }
 
   const ai = new GoogleGenAI({ apiKey });
@@ -121,7 +121,7 @@ const processImage = async (base64Image: string): Promise<AssessmentResult> => {
     };
 
   } catch (error) {
-    console.error("Gemini Analysis Error:", error);
+    console.error("AI Analysis Error:", error);
     throw new Error("Failed to analyze image. Please try again.");
   }
 };
