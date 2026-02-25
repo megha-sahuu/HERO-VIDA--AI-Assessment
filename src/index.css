@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors - Purple for Hero Vida Campus Challenge */
+  --color-brand-50: #f4ebff;
+  /* Distinctly Light Purple */
+  --color-brand-100: #e8d0ff;
+  --color-brand-200: #d8aaff;
+  --color-brand-300: #c57aff;
+  --color-brand-400: #b14aff;
+  --color-brand-500: #9c15ff;
+  --color-brand-600: #8800eb;
+  /* Primary Brand: Darker Vibrant Purple */
+  --color-brand-700: #7100c4;
+  --color-brand-800: #570099;
+  --color-brand-900: #3f0070;
+  --color-brand-950: #250042;
+  /* Very Dark Purple */
+
+  /* Surface / Neutral Colors - Slate for technical feel */
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #0f172a;
+  --color-surface-900: #020617;
+  --color-surface-950: #000000;
+
+  /* Semantic Map */
+  --color-primary: var(--color-brand-600);
+  --color-primary-foreground: #ffffff;
+
+  --color-background: var(--color-surface-50);
+  --color-surface: #ffffff;
+  --color-sidebar: #000000;
+  --color-sidebar-foreground: var(--color-surface-300);
+  --color-sidebar-hover: var(--color-brand-800);
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-surface-900);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-surface-400);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background-color: white;
+  }
+
+  .print-break-inside {
+    break-inside: avoid;
+  }
+}
+
+@theme {
+  --animate-scan: scan 2s linear infinite;
+  --animate-shimmer: shimmer 3s infinite linear;
+
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(200%);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Blob Animation */
+  --animate-blob: blob 7s infinite;
+
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+}
+
+/* Utility for animation delay */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}

@@ -1,0 +1,121 @@
+import React, { useRef, useState } from 'react';
+import { AssessmentResult, Currency } from '../../../types';
+import AnalysisHeader from './AnalysisHeader';
+import AnalysisVisuals from './AnalysisVisuals';
+import AnalysisCostOverview from './AnalysisCostOverview';
+import AnalysisCharts from './AnalysisCharts';
+import PartsManifestModal from './PartsManifestModal';
+import { usePdfGenerator } from '../hooks/usePdfGenerator';
+import { Car, Calendar, Hash, DollarSign, Shield } from 'lucide-react';
+import { formatCurrency } from '../../../utils/currencyUtils';
+
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+
+interface AnalysisDashboardProps {
+  result: AssessmentResult;
+  imageUrl: string;
+  currency: Currency;
+}
+
+const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({ result, imageUrl, currency }) => {
+  const visualizerRef = useRef<HTMLDivElement>(null);
+  const { isGeneratingPdf, generatePdf } = usePdfGenerator();
+  const [showPartsModal, setShowPartsModal] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+
+  const handleDownloadPDF = () => {
+    generatePdf(result, currency, visualizerRef.current);
+  };
+
+  return (
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 animate-in fade-in duration-500">
+      <AnalysisHeader
+        onDownloadPdf={handleDownloadPDF}
+        onShowParts={() => setShowPartsModal(true)}
+        isGeneratingPdf={isGeneratingPdf}
+      />
+
+      <PartsManifestModal
+        isOpen={showPartsModal}
+        onClose={() => setShowPartsModal(false)}
+        result={result}
+        currency={currency}
+      />
+
+      {/* Snapshot Header Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
+        <div className="bg-white p-4 rounded-xl border border-surface-200 shadow-sm flex items-center gap-3">
+          <div className="p-2 bg-brand-50 rounded-lg text-brand-600">
+            <Hash className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-xs text-surface-500 font-medium uppercase">Report ID</p>
+            <p className="font-mono font-bold text-surface-900 text-xs sm:text-sm break-all">{result.id}</p>
+          </div>
+        </div>
+        <div className="bg-white p-4 rounded-xl border border-surface-200 shadow-sm flex items-center gap-3">
+          <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+            <Car className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-xs text-surface-500 font-medium uppercase">Vehicle</p>
+            <p className="font-bold text-surface-900 text-sm line-clamp-1">{result.vehicleType}</p>
+          </div>
+        </div>
+        <div className="bg-white p-4 rounded-xl border border-surface-200 shadow-sm flex items-center gap-3">
+          <div className={`p-2 rounded-lg ${result.fraudRisk === 'Low' ? 'bg-emerald-50 text-emerald-600' :
+            result.fraudRisk === 'Medium' ? 'bg-amber-50 text-amber-600' :
+              'bg-rose-50 text-rose-600'
+            }`}>
+            <Shield className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-xs text-surface-500 font-medium uppercase">Fraud Risk</p>
+            <p className={`font-bold text-sm ${result.fraudRisk === 'Low' ? 'text-emerald-700' :
+              result.fraudRisk === 'Medium' ? 'text-amber-700' :
+                'text-rose-700'
+              }`}>{result.fraudRisk}</p>
+          </div>
+        </div>
+        <div className="bg-white p-4 rounded-xl border border-surface-200 shadow-sm flex items-center gap-3">
+          <div className="p-2 bg-emerald-50 rounded-lg text-emerald-600">
+            <DollarSign className="w-5 h-5" />
+          </div>
+          <div>
+            <p className="text-xs text-surface-500 font-medium uppercase">Est. Total</p>
+            <p className="font-bold text-surface-900 text-sm">{formatCurrency(result.totalEstimatedCost)}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-start">
+
+        {/* Left Column: Visuals */}
+        <div className="lg:col-span-7 space-y-8">
+          <AnalysisVisuals imageUrl={imageUrl} result={result} visualizerRef={visualizerRef} />
+          <div className="hidden lg:block">
+            {isDesktop && <AnalysisCharts result={result} currency={currency} />}
+          </div>
+        </div>
+
+        {/* Right Column: Data & Costs */}
+        <div className="lg:col-span-5 space-y-6 sticky top-8">
+          <AnalysisCostOverview result={result} currency={currency} />
+          <div className="lg:hidden">
+            {!isDesktop && <AnalysisCharts result={result} currency={currency} />}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer for Print */}
+      <div className="hidden print:block mt-8 pt-8 border-t border-surface-200 text-center text-slate-400 text-sm">
+        <p className="font-mono font-bold text-slate-600 mb-2">Report ID: {result.id}</p>
+        <p>Generated by Hero Vida Prototype on {new Date(result.timestamp).toLocaleDateString()}</p>
+        <p>This report is an AI-generated estimate and requires final validation by a certified adjuster.</p>
+      </div>
+    </div>
+  );
+};
+
+export default AnalysisDashboard;
