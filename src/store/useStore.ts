@@ -5,7 +5,7 @@ import { UserProfile } from '../types';
 interface AppState {
   user: UserProfile | null;
   isHydrated: boolean; // To know if persist has loaded
-  
+
   // Actions
   setUser: (user: UserProfile | null) => void;
   setHydrated: (state: boolean) => void;
@@ -18,17 +18,17 @@ export const useStore = create<AppState>()(
       isHydrated: false,
 
       setUser: (user) => set({ user }),
-      
+
       setHydrated: (state) => set({ isHydrated: state }),
     }),
     {
-      name: 'carscube-storage', // unique name
+      name: 'hero-storage', // unique name
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         state?.setHydrated(true);
       },
-      partialize: (state) => ({ 
-        user: state.user 
+      partialize: (state) => ({
+        user: state.user
       }), // Persist user
     }
   )
