@@ -7,7 +7,7 @@ This prototype is a web application that helps automatically analyze vehicle dam
 
 ---
 
-## 🚀 Hackathon Problem Statement Addressed
+##  Hackathon Problem Statement Addressed
 
 Vehicle inspections during insurance claims, dealer intake, and service check-ins are often manual, time-consuming, subjective, and error-prone. 
 
@@ -22,7 +22,7 @@ This prototype solves this by providing:
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 * **Frontend:** React 19, Vite, Tailwind CSS (Customized Hero Vida Purple Theme)
 * **AI Engine:** Advanced Multimodal Vision API
@@ -31,7 +31,7 @@ This prototype solves this by providing:
 
 ---
 
-## ⚙️ Setup & Installation
+##  Setup & Installation
 
 ### Prerequisites
 * Node.js (v18+ recommended)
@@ -58,7 +58,7 @@ This prototype solves this by providing:
 
 ---
 
-## 📱 How to Use the Prototype
+##  How to Use the Prototype
 
 1. **Login:** Use the Mock Login to bypass authentication for demo purposes.
 2. **Launch Scanner:** Click "Start Assessment" on the dashboard.
