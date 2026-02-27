@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     // Check if user is already logged in (simulated persistence)
-    const storedAuth = localStorage.getItem('carscube_mock_auth');
+    const storedAuth = localStorage.getItem('hero_mock_auth');
     if (storedAuth === 'true') {
       setUser(mockUser);
     }
@@ -52,13 +52,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       hasCompletedOnboarding: true
     };
     setUser(mockUser);
-    localStorage.setItem('carscube_mock_auth', 'true');
+    localStorage.setItem('hero_mock_auth', 'true');
     setIsLoading(false);
   };
 
   const logout = async () => {
     setUser(null);
-    localStorage.removeItem('carscube_mock_auth');
+    localStorage.removeItem('hero_mock_auth');
   };
 
   const updateUser = (userData: UserProfile) => {

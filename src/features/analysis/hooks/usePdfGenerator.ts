@@ -311,7 +311,7 @@ export const usePdfGenerator = () => {
       const totalWidth = doc.getTextWidth(totalStr);
       doc.text(totalStr, pageWidth - margin - totalWidth - 10, yPos + 13);
 
-      doc.save(`Carcubes_Report_${result.id}.pdf`);
+      doc.save(`HeroVida_Report_${result.id}.pdf`);
 
     } catch (error) {
       console.error("PDF Generation Error:", error);
