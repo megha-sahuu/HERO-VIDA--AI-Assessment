@@ -173,11 +173,11 @@ export const reportService = {
       const reportId = Math.random().toString(36).substr(2, 9);
       docData.id = reportId;
 
-      const existingData = localStorage.getItem('carscube_reports');
+      const existingData = localStorage.getItem('hero_reports');
       const reports: SavedReport[] = existingData ? JSON.parse(existingData) : [];
       reports.push(docData as SavedReport);
 
-      localStorage.setItem('carscube_reports', JSON.stringify(reports));
+      localStorage.setItem('hero_reports', JSON.stringify(reports));
       return reportId;
     } catch (error) {
       console.error("Save report error:", error);
@@ -187,7 +187,7 @@ export const reportService = {
 
   getUserReports: async (userId: string): Promise<SavedReport[]> => {
     try {
-      const existingData = localStorage.getItem('carscube_reports');
+      const existingData = localStorage.getItem('hero_reports');
       if (!existingData) return [];
 
       const allReports: SavedReport[] = JSON.parse(existingData);
@@ -214,7 +214,7 @@ export const reportService = {
 
   getReportById: async (reportId: string): Promise<SavedReport | null> => {
     try {
-      const existingData = localStorage.getItem('carscube_reports');
+      const existingData = localStorage.getItem('hero_reports');
       if (!existingData) return null;
 
       const allReports: SavedReport[] = JSON.parse(existingData);
